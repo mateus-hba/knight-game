@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d14ibbmej60yg"]
+[gd_scene load_steps=12 format=3 uid="uid://d14ibbmej60yg"]
 
 [ext_resource type="PackedScene" uid="uid://b18aibkc6awuq" path="res://scenes/player.tscn" id="1_vbkno"]
 [ext_resource type="Texture2D" uid="uid://b1s7y7khceutp" path="res://assets/sprites/world_tileset.png" id="2_22m0g"]
 [ext_resource type="PackedScene" uid="uid://dlqd0yvbhoocw" path="res://scenes/platform.tscn" id="3_cxcdo"]
 [ext_resource type="PackedScene" uid="uid://c1wmbw8uwul2n" path="res://scenes/coin.tscn" id="4_isufm"]
+[ext_resource type="PackedScene" uid="uid://duwwwixln34ax" path="res://scenes/killzone.tscn" id="5_ypckq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0eeay"]
 texture = ExtResource("2_22m0g")
@@ -447,6 +448,8 @@ _data = {
 "move": SubResource("Animation_qpa0j")
 }
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ttrws"]
+
 [node name="Game" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -460,6 +463,8 @@ position = Vector2(-32, -6)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -5)
 zoom = Vector2(4, 4)
+limit_bottom = 90
+limit_smoothed = true
 position_smoothing_enabled = true
 
 [node name="Platform" parent="." instance=ExtResource("3_cxcdo")]
@@ -497,3 +502,9 @@ position = Vector2(325, -47)
 
 [node name="Coin9" parent="." instance=ExtResource("4_isufm")]
 position = Vector2(357, -73)
+
+[node name="Killzone" parent="." instance=ExtResource("5_ypckq")]
+position = Vector2(20, 95)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("WorldBoundaryShape2D_ttrws")
